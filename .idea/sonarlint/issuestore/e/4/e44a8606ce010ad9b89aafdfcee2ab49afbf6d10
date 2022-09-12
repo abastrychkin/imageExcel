@@ -1,0 +1,8 @@
+
+7
+java:S1220""Move this file to a named package.8Ô¦Şà±0
+U	java:S106"9Replace this use of System.out or System.err by a logger.(ş¥‰8Ô¦Şà±0
+L
+java:S1481"*Remove this unused "pixel" local variable.(œ¨ã¾ıÿÿÿÿ8ÈÇãá±0
+[
+java:S1854"9Remove this useless assignment to local variable "pixel".(œ¨ã¾ıÿÿÿÿ8ÈÇãá±0
