@@ -18,6 +18,19 @@ public class Main {
 
             Raster pixels = myPicture.getTile(0,0);
 
+            int[] pixelsArr = new int[128*128];
+
+            pixels.getPixels(0,0,128,128, pixelsArr);
+
+
+            int[][]pixelsTwoDimArr = new int[128][128];
+            for (int i = 0; i < 128; i++) {
+
+                for (int j = 0; j < 128; j++) {
+                    pixelsTwoDimArr[i][j] = pixelsArr[i*128 + j];
+
+                }
+            }
 
             JLabel picLabel = new JLabel(new ImageIcon(myPicture));
 
@@ -32,8 +45,5 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
     }
 }
