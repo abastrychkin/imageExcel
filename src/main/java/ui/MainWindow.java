@@ -16,6 +16,8 @@ public class MainWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(new Dimension(640, 480));
         JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+
         frame.add(mainPanel);
 
         JPanel loadButtonsPanel = new JPanel();
