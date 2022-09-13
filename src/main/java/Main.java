@@ -33,6 +33,7 @@ public class Main {
 
         MainWindow mainWindow = new MainWindow();
         mainWindow.setBufferedImage(bufferedImage);
+        mainWindow.showFrame();
         mainWindow.showBufferedImage();
 
         ImageMatrix matrix = imageFromFile.toImageMatrix();
