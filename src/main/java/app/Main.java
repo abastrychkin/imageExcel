@@ -1,3 +1,5 @@
+package app;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +14,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import image.ImageFromFile;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import matrix.ImageMatrix;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -19,7 +23,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import ui.MainWindow;
 
-public class Main {
+public class Main extends Application {
 
 
     public static void main(String[] args) {
@@ -31,10 +35,11 @@ public class Main {
 
         BufferedImage bufferedImage = imageFromFile.getBufferedImage();
 
-        MainWindow mainWindow = new MainWindow();
-        mainWindow.setBufferedImage(bufferedImage);
-        mainWindow.showFrame();
-        mainWindow.showBufferedImage();
+//        MainWindow mainWindow = new MainWindow();
+//        mainWindow.setBufferedImage(bufferedImage);
+//        mainWindow.showFrame();
+//        mainWindow.showBufferedImage();
+        Application.launch();
 
         ImageMatrix matrix = imageFromFile.toImageMatrix();
 
@@ -46,5 +51,10 @@ public class Main {
         }
 
         System.out.println("gfgcontribute.xlsx written successfully on disk.");
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        stage.show();
     }
 }
