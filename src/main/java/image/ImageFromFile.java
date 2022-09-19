@@ -1,12 +1,16 @@
 package image;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 import matrix.ImageMatrix;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
+
 
 public class ImageFromFile {
     BufferedImage bufferedImage;
@@ -21,6 +25,10 @@ public class ImageFromFile {
 
     public BufferedImage getBufferedImage() {
         return bufferedImage;
+    }
+
+    public Image getFXImage() {
+        return SwingFXUtils.toFXImage(bufferedImage, null);
     }
 
     public ImageMatrix toImageMatrix() {
