@@ -6,6 +6,7 @@ module imageExcel {
     requires org.apache.poi.ooxml;
     requires java.desktop;
     requires javafx.swing;
+    requires javafx.fxml;
 
     opens app to javafx.fxml;
     exports app;
