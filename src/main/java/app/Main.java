@@ -30,6 +30,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import ui.MainWindow;
+import ui.MainWindowController;
 
 public class Main extends Application {
 
@@ -54,9 +55,9 @@ public class Main extends Application {
 //
         String imagePath = "3_03.jpg";
         ImageFromFile imageFromFile = new ImageFromFile(imagePath);
-//
-//
-//        Image image = imageFromFile.getFXImage();
+
+        Image image = imageFromFile.getFXImage();
+
 //        ImageView imageView = new ImageView();
 //        imageView.setImage(image);
 //
@@ -75,8 +76,13 @@ public class Main extends Application {
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
 
+        MainWindowController controller = loader.getController();
+
         stage.setScene(new Scene(root));
+
         stage.show();
+        controller.setImage(image);
+        stage.sizeToScene();
 
         ImageMatrix matrix = imageFromFile.toImageMatrix();
 

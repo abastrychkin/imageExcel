@@ -5,7 +5,10 @@
 <?import javafx.scene.image.*?>
 
 <!--Допускается только один компонент на корневом уровне-->
-<HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
-    <Label>Hello World!</Label>
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:id="hBox"
+      fx:controller = "ui.MainWindowController">
+    <Label fx:id="label">Hello World!</Label>
     <ImageView fx:id="imageView"></ImageView>
 </HBox>

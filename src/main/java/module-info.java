@@ -11,5 +11,8 @@ module imageExcel {
     opens app to javafx.fxml;
     exports app;
 
+    opens ui to javafx.fxml;
+    exports ui;
+
 
 }
