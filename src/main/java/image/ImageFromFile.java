@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import matrix.ImageMatrix;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import java.io.File;
