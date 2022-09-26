@@ -15,8 +15,12 @@ public class ImageFromFile {
     BufferedImage bufferedImage;
 
     public ImageFromFile(String imagePath) {
+        this(new File(imagePath));
+    }
+
+    public ImageFromFile(File imageFile) {
         try {
-            this.bufferedImage = ImageIO.read(new File(imagePath));
+            this.bufferedImage = ImageIO.read(imageFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
