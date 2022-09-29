@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.net.URL;
 
 public class Main extends Application {
+    ImageFromFile imageFromFile;
 
 
     public static void main(String[] args) {
@@ -25,7 +26,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         String imagePath = "3_03.jpg";
-        ImageFromFile imageFromFile = new ImageFromFile(imagePath);
+        imageFromFile = new ImageFromFile(imagePath);
 
         Image image = imageFromFile.getFXImage();
 
@@ -35,6 +36,7 @@ public class Main extends Application {
         Parent root = loader.load();
 
         MainWindowController controller = loader.getController();
+        controller.setImageFromFile(imageFromFile);
 
         stage.setScene(new Scene(root));
 

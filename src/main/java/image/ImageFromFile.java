@@ -5,7 +5,9 @@ import javafx.scene.image.Image;
 import matrix.ImageMatrix;
 
 import javax.imageio.ImageIO;
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorConvertOp;
 import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +23,12 @@ public class ImageFromFile {
     public ImageFromFile(File imageFile) {
         try {
             this.bufferedImage = ImageIO.read(imageFile);
+
+            ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
+            ColorConvertOp op = new ColorConvertOp(cs, null);
+            BufferedImage image = op.filter(bufferedImage, null);
+            bufferedImage = image;
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
