@@ -20,7 +20,7 @@ public class ImageFromFile {
         this(new File(imagePath));
     }
 
-    public ImageFromFile(File imageFile) {
+    private ImageFromFile(File imageFile) {
         try {
             this.bufferedImage = ImageIO.read(imageFile);
 
@@ -32,6 +32,10 @@ public class ImageFromFile {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static ImageFromFile fromImageFile(File imageFile) {
+        return new ImageFromFile(imageFile);
     }
 
     public BufferedImage getBufferedImage() {

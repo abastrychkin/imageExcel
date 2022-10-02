@@ -5,7 +5,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.awt.image.BufferedImage;
+import java.awt.*;
+import java.awt.color.ColorSpace;
+import java.awt.image.*;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -17,8 +21,33 @@ public class ImageMatrix {
         this.imageMatrix = imageMatrix;
     }
 
-    public BufferedImage toImage(){
-        return new BufferedImage(1,1, BufferedImage.TYPE_BYTE_GRAY);
+    public BufferedImage toBufferedImage(){
+        int width = imageMatrix.length;
+        int height = imageMatrix[0].length;
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+
+        int[] pixelsArr = new int[width * height];
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                pixelsArr[i*width + j] = imageMatrix[i][j];
+            }
+        }
+
+        byte[] byteArray = new byte[pixelsArr.length];
+        for (int i = 0; i < pixelsArr.length; i++) {
+            byteArray[i] = (byte) pixelsArr[i];
+        }
+
+        DataBuffer dataBuf = new DataBufferByte(byteArray, byteArray.length);
+        int bitsPerPixel = 8;
+        Raster raster = Raster.createRaster(new MultiPixelPackedSampleModel(DataBuffer.TYPE_BYTE, width, height, bitsPerPixel),
+                dataBuf,
+                null);
+
+        bufferedImage.setData(raster);
+
+        return bufferedImage;
     }
 
     public XSSFWorkbook toExcel() {

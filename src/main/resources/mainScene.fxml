@@ -20,7 +20,7 @@
     <ImageView fx:id="imageView" HBox.hgrow="ALWAYS" />
    <VBox spacing="10.0" HBox.hgrow="ALWAYS">
       <children>
-         <Button mnemonicParsing="false" text="Save as image" />
+         <Button fx:id="saveImageButton" mnemonicParsing="false" onAction="#saveImageButtonClicked" text="Save as image" />
          <Button fx:id="saveExcelButton" onAction="#saveExcelButtonClicked" mnemonicParsing="false" text="Save as excel" />
       </children>
    </VBox>

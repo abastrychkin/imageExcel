@@ -10,8 +10,11 @@ import javafx.stage.Stage;
 import matrix.ImageMatrix;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainWindowController {
     @FXML
@@ -36,13 +39,10 @@ public class MainWindowController {
         FileChooser dialog = new FileChooser();
 
         dialog.setTitle("Choose file");
-
-        File result = dialog.showOpenDialog(hBox.getScene().getWindow());
-
-        imageFromFile = new ImageFromFile(result);
+        File imageFile = dialog.showOpenDialog(hBox.getScene().getWindow());
+        imageFromFile = ImageFromFile.fromImageFile(imageFile);
 
         setImage(imageFromFile.getFXImage());
-
         Stage currentStage =  (Stage) hBox.getScene().getWindow();
         currentStage.sizeToScene();
     }
@@ -52,7 +52,7 @@ public class MainWindowController {
         FileChooser fileChooser = new FileChooser();
 
         //Set extension filter for text files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls*)", "*.xls*");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
         fileChooser.getExtensionFilters().add(extFilter);
 
         //Show save file dialog
@@ -77,9 +77,39 @@ public class MainWindowController {
         }
 
         System.out.println(file.getName() + " written successfully on disk.");
-
     }
 
+    @FXML
+    private void saveImageButtonClicked() {
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image file (*.bmp)", "*.bmp");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(hBox.getScene().getWindow());
+        if (!file.getName().contains(".")) {
+            file = new File(file.getAbsolutePath() + ".xlsx");
+        }
+
+        if (file != null) {
+            saveImageToImage(file);
+        }
+    }
+
+    private void saveImageToImage(File file) {
+        ImageMatrix matrix = imageFromFile.toImageMatrix();
+
+        BufferedImage bufferedImage = matrix.toBufferedImage();
+        try {
+            ImageIO.write(bufferedImage, "bmp", file);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(file.getName() + " written successfully on disk.");
+    }
 
 
 }

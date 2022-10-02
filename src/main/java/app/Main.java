@@ -43,16 +43,5 @@ public class Main extends Application {
         stage.show();
         controller.setImage(image);
         stage.sizeToScene();
-
-        ImageMatrix matrix = imageFromFile.toImageMatrix();
-
-        XSSFWorkbook workbook = matrix.toExcel();
-        try (FileOutputStream out = new FileOutputStream("gfgcontribute.xlsx")) {
-            workbook.write(out);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("gfgcontribute.xlsx written successfully on disk.");
     }
 }
