@@ -7,11 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import matrix.ImageMatrix;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import ui.MainWindowController;
 
-import java.io.FileOutputStream;
 import java.net.URL;
 
 public class Main extends Application {
@@ -28,7 +25,7 @@ public class Main extends Application {
         String imagePath = "3_03.jpg";
         imageFromFile = new ImageFromFile(imagePath);
 
-        Image image = imageFromFile.getFXImage();
+        Image image = imageFromFile.toFXImage();
 
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = getClass().getResource("/mainScene.fxml");

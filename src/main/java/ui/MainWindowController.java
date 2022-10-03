@@ -42,7 +42,7 @@ public class MainWindowController {
         File imageFile = dialog.showOpenDialog(hBox.getScene().getWindow());
         imageFromFile = ImageFromFile.fromImageFile(imageFile);
 
-        setImage(imageFromFile.getFXImage());
+        setImage(imageFromFile.toFXImage());
         Stage currentStage =  (Stage) hBox.getScene().getWindow();
         currentStage.sizeToScene();
     }
