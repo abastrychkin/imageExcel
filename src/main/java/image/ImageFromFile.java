@@ -60,29 +60,7 @@ public class ImageFromFile {
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheetAt(0);
 
-            int rowCount = datatypeSheet.getLastRowNum() + 1;
-            int colCount =  datatypeSheet.getRow(0).getLastCellNum();
-
-            pixelsMatrix = new int[rowCount][colCount];
-
-            Iterator<Row> iterator = datatypeSheet.iterator();
-            int rowCounter = 0;
-            while (iterator.hasNext()) {
-
-                Row currentRow = iterator.next();
-                Iterator<Cell> cellIterator = currentRow.iterator();
-
-                int cellCounter = 0;
-                while (cellIterator.hasNext()) {
-                    Cell currentCell = cellIterator.next();
-                    //getCellTypeEnum shown as deprecated for version 3.15
-                    //getCellTypeEnum ill be renamed to getCellType starting from version 4.0
-                    pixelsMatrix[rowCounter][cellCounter] =  (int)currentCell.getNumericCellValue();
-                    cellCounter++;
-                }
-
-                rowCounter++;
-            }
+            pixelsMatrix = getPixelsMatrixFromExcelSheet(datatypeSheet);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -94,7 +72,37 @@ public class ImageFromFile {
         BufferedImage bufferedImage = new ImageMatrix(pixelsMatrix).toBufferedImage();
         return new ImageFromFile(bufferedImage) ;
 
+    }
 
+    private static int[][] getPixelsMatrixFromExcelSheet(Sheet datatypeSheet) {
+        int rowCount = datatypeSheet.getLastRowNum() + 1;
+        int colCount =  datatypeSheet.getRow(0).getLastCellNum();
+
+        int[][] pixelsMatrix;
+        pixelsMatrix = new int[rowCount][colCount];
+
+        setExcelDataToPixelsMatrix(datatypeSheet, pixelsMatrix);
+        return pixelsMatrix;
+    }
+
+    private static void setExcelDataToPixelsMatrix(Sheet datatypeSheet, int[][] pixelsMatrix) {
+        Iterator<Row> rowIterator = datatypeSheet.iterator();
+        int rowCounter = 0;
+        while (rowIterator.hasNext()) {
+            Row currentRow = rowIterator.next();
+            setExcelDataToPixelsMatrixRow(currentRow, pixelsMatrix[rowCounter]);
+            rowCounter++;
+        }
+    }
+
+    private static void setExcelDataToPixelsMatrixRow(Row currentRow, int[] pixelsMatrix) {
+        Iterator<Cell> cellIterator = currentRow.iterator();
+        int cellCounter = 0;
+        while (cellIterator.hasNext()) {
+            Cell currentCell = cellIterator.next();
+            pixelsMatrix[cellCounter] =  (int)currentCell.getNumericCellValue();
+            cellCounter++;
+        }
     }
 
 
