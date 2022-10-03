@@ -11,7 +11,7 @@
    <VBox spacing="10.0" HBox.hgrow="ALWAYS">
       <children>
           <Button fx:id="loadImageButton" onAction="#loadImageButtonClicked" text="Open image" />
-         <Button mnemonicParsing="false" text="Open excel" />
+         <Button  fx:id="loadExcelButton" onAction="#loadExcelButtonClicked" mnemonicParsing="false" text="Open excel" />
       </children>
       <HBox.margin>
          <Insets />

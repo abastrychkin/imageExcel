@@ -48,6 +48,20 @@ public class MainWindowController {
     }
 
     @FXML
+    private void loadExcelButtonClicked() {
+        System.out.println("loadImageButtonClicked");
+        FileChooser dialog = new FileChooser();
+
+        dialog.setTitle("Choose file");
+        File excelFile = dialog.showOpenDialog(hBox.getScene().getWindow());
+        imageFromFile = ImageFromFile.fromExcelFile(excelFile);
+
+        setImage(imageFromFile.toFXImage());
+        Stage currentStage =  (Stage) hBox.getScene().getWindow();
+        currentStage.sizeToScene();
+    }
+
+    @FXML
     private void saveExcelButtonClicked() {
         FileChooser fileChooser = new FileChooser();
 
