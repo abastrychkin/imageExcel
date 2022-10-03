@@ -82,8 +82,6 @@ public class ImageFromFile {
                 }
 
                 rowCounter++;
-                System.out.println();
-
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
