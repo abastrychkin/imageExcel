@@ -22,10 +22,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        String imagePath = "3_03.jpg";
-        imageFromFile = new ImageFromFile(imagePath);
+//        String imagePath = "3_03.jpg";
+//        imageFromFile = new ImageFromFile(imagePath);
 
-        Image image = imageFromFile.toFXImage();
+//        Image image = imageFromFile.toFXImage();
 
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = getClass().getResource("/mainScene.fxml");
@@ -33,12 +33,12 @@ public class Main extends Application {
         Parent root = loader.load();
 
         MainWindowController controller = loader.getController();
-        controller.setImageFromFile(imageFromFile);
+  //      controller.setImageFromFile(imageFromFile);
 
         stage.setScene(new Scene(root));
 
         stage.show();
-        controller.setImage(image);
+//        controller.setImage(image);
         stage.sizeToScene();
     }
 }
