@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -11,17 +12,24 @@
    <VBox spacing="10.0" HBox.hgrow="ALWAYS">
       <children>
           <Button fx:id="loadImageButton" onAction="#loadImageButtonClicked" text="Open image" />
-         <Button  fx:id="loadExcelButton" onAction="#loadExcelButtonClicked" mnemonicParsing="false" text="Open excel" />
+         <Button fx:id="loadExcelButton" mnemonicParsing="false" onAction="#loadExcelButtonClicked" text="Open excel" />
       </children>
       <HBox.margin>
          <Insets />
       </HBox.margin>
    </VBox>
-    <ImageView fx:id="imageView" HBox.hgrow="ALWAYS" />
+   <ScrollPane pannable="true" >
+      <content>
+          <ImageView fx:id="imageView" />
+      </content>
+      <cursor>
+         <Cursor fx:constant="NONE" />
+      </cursor>
+   </ScrollPane>
    <VBox spacing="10.0" HBox.hgrow="ALWAYS">
       <children>
          <Button fx:id="saveImageButton" mnemonicParsing="false" onAction="#saveImageButtonClicked" text="Save as image" />
-         <Button fx:id="saveExcelButton" onAction="#saveExcelButtonClicked" mnemonicParsing="false" text="Save as excel" />
+         <Button fx:id="saveExcelButton" mnemonicParsing="false" onAction="#saveExcelButtonClicked" text="Save as excel" />
       </children>
    </VBox>
    <padding>
