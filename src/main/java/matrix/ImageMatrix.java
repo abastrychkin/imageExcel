@@ -17,8 +17,8 @@ public class ImageMatrix {
     }
 
     public BufferedImage toBufferedImage(){
-        int width = pixelsMatrix.length;
-        int height = pixelsMatrix[0].length;
+        int height = pixelsMatrix.length;
+        int width = pixelsMatrix[0].length;
 
         BufferedImage bufferedImage = getEmptyBufferedImage(width, height);
         Raster pixels = getRaster(width, height);
