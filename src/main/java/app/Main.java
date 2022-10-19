@@ -35,6 +35,7 @@ public class Main extends Application {
         MainWindowController controller = loader.getController();
   //      controller.setImageFromFile(imageFromFile);
 
+
         stage.setScene(new Scene(root));
 
         stage.show();

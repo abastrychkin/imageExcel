@@ -2,6 +2,8 @@ package ui;
 
 import image.ImageFromFile;
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -11,6 +13,7 @@ import matrix.ImageMatrix;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,6 +25,12 @@ public class MainWindowController {
 
     @FXML
     private HBox hBox;
+
+    @FXML
+    private ScrollPane scrollPane;
+
+    @FXML
+    private Slider zoomSlider;
 
     private ImageFromFile imageFromFile;
 
@@ -123,6 +132,20 @@ public class MainWindowController {
         }
 
         System.out.println(file.getName() + " written successfully on disk.");
+    }
+
+
+    @FXML
+    public void initialize() {
+        imageView.setPreserveRatio(true);
+
+        zoomSlider.valueProperty().addListener((o, oldV, newV) -> {
+            var x = scrollPane.getHvalue();
+            var y = scrollPane.getVvalue();
+            imageView.setFitWidth(imageFromFile.getBufferedImage().getWidth() * newV.doubleValue());
+            scrollPane.setHvalue(x);
+            scrollPane.setVvalue(y);
+        });
     }
 
 

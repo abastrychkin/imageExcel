@@ -18,14 +18,19 @@
          <Insets />
       </HBox.margin>
    </VBox>
-   <ScrollPane pannable="true" >
-      <content>
-          <ImageView fx:id="imageView" />
-      </content>
-      <cursor>
-         <Cursor fx:constant="NONE" />
-      </cursor>
-   </ScrollPane>
+   <VBox>
+      <children>
+         <ScrollPane fx:id="scrollPane" hvalue="0.5" pannable="true" vvalue="0.5">
+            <content>
+                <ImageView fx:id="imageView" />
+            </content>
+            <cursor>
+               <Cursor fx:constant="DEFAULT" />
+            </cursor>
+         </ScrollPane>
+         <Slider fx:id="zoomSlider" blockIncrement="0.1" max="3.0" min="1.0" value="1.0" />
+      </children>
+   </VBox>
    <VBox spacing="10.0" HBox.hgrow="ALWAYS">
       <children>
          <Button fx:id="saveImageButton" mnemonicParsing="false" onAction="#saveImageButtonClicked" text="Save as image" />
