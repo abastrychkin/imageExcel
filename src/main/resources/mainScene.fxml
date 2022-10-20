@@ -8,30 +8,42 @@
 
 <!--Допускается только один компонент на корневом уровне-->
 
-<HBox fx:id="hBox" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWindowController">
-   <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+<HBox fx:id="hBox" alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWindowController">
+   <VBox alignment="TOP_CENTER" minWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
       <children>
-          <Button fx:id="loadImageButton" onAction="#loadImageButtonClicked" text="Open image" />
+         <Button fx:id="loadImageButton" onAction="#loadImageButtonClicked" text="Open image" />
          <Button fx:id="loadExcelButton" mnemonicParsing="false" onAction="#loadExcelButtonClicked" text="Open excel" />
       </children>
       <HBox.margin>
          <Insets />
       </HBox.margin>
    </VBox>
-   <VBox>
+   <VBox alignment="TOP_CENTER">
       <children>
-         <ScrollPane fx:id="scrollPane" hvalue="0.5" pannable="true" vvalue="0.5">
+         <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hvalue="0.5" maxHeight="-Infinity" maxWidth="-Infinity" pannable="true" prefHeight="512.0" prefWidth="512.0" vvalue="0.5">
             <content>
-                <ImageView fx:id="imageView" />
+               <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <children>
+                     <Group>
+                        <children>
+                           <ImageView fx:id="imageView" nodeOrientation="INHERIT" />
+                        </children>
+                     </Group>
+                  </children>
+               </StackPane>
             </content>
+
             <cursor>
                <Cursor fx:constant="DEFAULT" />
             </cursor>
          </ScrollPane>
-         <Slider fx:id="zoomSlider" blockIncrement="0.1" max="3.0" min="1.0" value="1.0" />
+
+
+
+         <Slider fx:id="zoomSlider" blockIncrement="0.1" max="3.0" min="0.1" value="1.0" />
       </children>
    </VBox>
-   <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+   <VBox alignment="TOP_CENTER" minWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
       <children>
          <Button fx:id="saveImageButton" mnemonicParsing="false" onAction="#saveImageButtonClicked" text="Save as image" />
          <Button fx:id="saveExcelButton" mnemonicParsing="false" onAction="#saveExcelButtonClicked" text="Save as excel" />
