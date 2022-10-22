@@ -6,6 +6,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -24,7 +25,7 @@ public class MainWindowController {
     private ImageView imageView;
 
     @FXML
-    private HBox hBox;
+    private BorderPane borderPane;
 
     @FXML
     private ScrollPane scrollPane;
@@ -36,6 +37,9 @@ public class MainWindowController {
 
     public void setImage(Image image) {
         imageView.setImage(image);
+
+        double zoomCoefficient =  scrollPane.getWidth() / imageFromFile.getBufferedImage().getWidth();
+        zoomSlider.setValue(zoomCoefficient);
     }
 
     public void setImageFromFile(ImageFromFile imageFromFile) {
@@ -48,11 +52,13 @@ public class MainWindowController {
         FileChooser dialog = new FileChooser();
 
         dialog.setTitle("Choose file");
-        File imageFile = dialog.showOpenDialog(hBox.getScene().getWindow());
+        File imageFile = dialog.showOpenDialog(borderPane.getScene().getWindow());
         imageFromFile = ImageFromFile.fromImageFile(imageFile);
 
         setImage(imageFromFile.toFXImage());
-        Stage currentStage =  (Stage) hBox.getScene().getWindow();
+
+
+        Stage currentStage =  (Stage) borderPane.getScene().getWindow();
         currentStage.sizeToScene();
     }
 
@@ -62,11 +68,11 @@ public class MainWindowController {
         FileChooser dialog = new FileChooser();
 
         dialog.setTitle("Choose file");
-        File excelFile = dialog.showOpenDialog(hBox.getScene().getWindow());
+        File excelFile = dialog.showOpenDialog(borderPane.getScene().getWindow());
         imageFromFile = ImageFromFile.fromExcelFile(excelFile);
 
         setImage(imageFromFile.toFXImage());
-        Stage currentStage =  (Stage) hBox.getScene().getWindow();
+        Stage currentStage =  (Stage) borderPane.getScene().getWindow();
         currentStage.sizeToScene();
     }
 
@@ -79,7 +85,7 @@ public class MainWindowController {
         fileChooser.getExtensionFilters().add(extFilter);
 
         //Show save file dialog
-        File file = fileChooser.showSaveDialog(hBox.getScene().getWindow());
+        File file = fileChooser.showSaveDialog(borderPane.getScene().getWindow());
         if(!file.getName().contains(".")) {
             file = new File(file.getAbsolutePath() + ".xlsx");
         }
@@ -111,7 +117,7 @@ public class MainWindowController {
         fileChooser.getExtensionFilters().add(extFilter);
 
         //Show save file dialog
-        File file = fileChooser.showSaveDialog(hBox.getScene().getWindow());
+        File file = fileChooser.showSaveDialog(borderPane.getScene().getWindow());
         if (!file.getName().contains(".")) {
             file = new File(file.getAbsolutePath() + ".xlsx");
         }
@@ -142,9 +148,11 @@ public class MainWindowController {
         zoomSlider.valueProperty().addListener((o, oldV, newV) -> {
             var x = scrollPane.getHvalue();
             var y = scrollPane.getVvalue();
+
             imageView.setFitWidth(imageFromFile.getBufferedImage().getWidth() * newV.doubleValue());
             scrollPane.setHvalue(x);
             scrollPane.setVvalue(y);
+
         });
     }
 

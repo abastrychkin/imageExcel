@@ -5,51 +5,57 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <!--Допускается только один компонент на корневом уровне-->
 
-<HBox fx:id="hBox" alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWindowController">
-   <VBox alignment="TOP_CENTER" minWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
-      <children>
-         <Button fx:id="loadImageButton" onAction="#loadImageButtonClicked" text="Open image" />
-         <Button fx:id="loadExcelButton" mnemonicParsing="false" onAction="#loadExcelButtonClicked" text="Open excel" />
-      </children>
-      <HBox.margin>
-         <Insets />
-      </HBox.margin>
-   </VBox>
-   <VBox alignment="TOP_CENTER">
-      <children>
-         <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hvalue="0.5" maxHeight="-Infinity" maxWidth="-Infinity" pannable="true" prefHeight="512.0" prefWidth="512.0" vvalue="0.5">
-            <content>
-               <StackPane>
-                  <children>
-                     <Group>
-                        <children>
-                           <ImageView fx:id="imageView" nodeOrientation="INHERIT" smooth="false" />
-                        </children>
-                     </Group>
-                  </children>
-               </StackPane>
-            </content>
+<BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWindowController">
+      <center>
+         <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hvalue="0.5" maxHeight="-Infinity" maxWidth="-Infinity" pannable="true" prefHeight="512.0" prefWidth="512.0" vvalue="0.5" BorderPane.alignment="CENTER">
 
             <cursor>
                <Cursor fx:constant="DEFAULT" />
             </cursor>
+            <content>
+               <ImageView fx:id="imageView" nodeOrientation="INHERIT" smooth="false" />
+            </content>
          </ScrollPane>
+      </center>
+      <bottom>
 
 
 
-         <Slider fx:id="zoomSlider" blockIncrement="0.1" max="10.0" min="0.1" value="1.0" />
-      </children>
-   </VBox>
-   <VBox alignment="TOP_CENTER" minWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
-      <children>
-         <Button fx:id="saveImageButton" mnemonicParsing="false" onAction="#saveImageButtonClicked" text="Save as image" />
-         <Button fx:id="saveExcelButton" mnemonicParsing="false" onAction="#saveExcelButtonClicked" text="Save as excel" />
-      </children>
-   </VBox>
+         <Slider fx:id="zoomSlider" blockIncrement="0.1" max="10.0" min="0.1" value="1.0" BorderPane.alignment="CENTER" />
+      </bottom>
+      <left>
+         <VBox alignment="CENTER" minWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+               <Button fx:id="loadImageButton" contentDisplay="CENTER" onAction="#loadImageButtonClicked" prefHeight="45.0" prefWidth="100.0" text="Open image" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+               <Button fx:id="loadExcelButton" mnemonicParsing="false" onAction="#loadExcelButtonClicked" prefHeight="45.0" prefWidth="100.0" text="Open excel">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            </children>
+         </VBox>
+      </left>
+      <right>
+         <VBox alignment="CENTER" minWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+               <Button fx:id="saveImageButton" mnemonicParsing="false" onAction="#saveImageButtonClicked" prefHeight="45.0" prefWidth="100.0" text="Save image" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+               <Button fx:id="saveExcelButton" mnemonicParsing="false" onAction="#saveExcelButtonClicked" prefHeight="45.0" prefWidth="100.0" text="Save excel">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            </children>
+         </VBox>
+      </right>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
-</HBox>
+   </BorderPane>
