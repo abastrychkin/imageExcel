@@ -12,7 +12,6 @@
 <BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWindowController">
       <center>
          <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hvalue="0.5" maxHeight="-Infinity" maxWidth="-Infinity" pannable="true" prefHeight="512.0" prefWidth="512.0" vvalue="0.5" BorderPane.alignment="CENTER">
-
             <cursor>
                <Cursor fx:constant="DEFAULT" />
             </cursor>
@@ -22,22 +21,21 @@
          </ScrollPane>
       </center>
       <bottom>
-
-
-
          <Slider fx:id="zoomSlider" blockIncrement="0.1" max="10.0" min="0.1" value="1.0" BorderPane.alignment="CENTER" />
       </bottom>
       <left>
          <VBox alignment="CENTER" minWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
                <Button fx:id="loadImageButton" contentDisplay="CENTER" onAction="#loadImageButtonClicked" prefHeight="45.0" prefWidth="100.0" text="Open image" textAlignment="CENTER">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Button>
                <Button fx:id="loadExcelButton" mnemonicParsing="false" onAction="#loadExcelButtonClicked" prefHeight="45.0" prefWidth="100.0" text="Open excel">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Button>
             </children>
          </VBox>
       </left>
@@ -45,13 +43,15 @@
          <VBox alignment="CENTER" minWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
                <Button fx:id="saveImageButton" mnemonicParsing="false" onAction="#saveImageButtonClicked" prefHeight="45.0" prefWidth="100.0" text="Save image" textAlignment="CENTER">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Button>
                <Button fx:id="saveExcelButton" mnemonicParsing="false" onAction="#saveExcelButtonClicked" prefHeight="45.0" prefWidth="100.0" text="Save excel">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Button>
             </children>
          </VBox>
       </right>
