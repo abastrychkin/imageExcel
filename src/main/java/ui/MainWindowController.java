@@ -1,7 +1,10 @@
 package ui;
 
 import image.ImageFromFile;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
@@ -10,8 +13,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import matrix.ImageMatrix;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import ui.tasks.SaveImageTask;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,6 +31,10 @@ public class MainWindowController {
     private ScrollPane scrollPane;
     @FXML
     private Slider zoomSlider;
+    @FXML
+    private ProgressBar progressBar;
+    @FXML
+    private Label progressBarLabel;
 
     private ImageFromFile imageFromFile;
 
@@ -132,12 +141,16 @@ public class MainWindowController {
         ImageMatrix matrix = imageFromFile.toImageMatrix();
 
         BufferedImage bufferedImage = matrix.toBufferedImage();
-        try {
-            ImageIO.write(bufferedImage, "bmp", file);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            ImageIO.write(bufferedImage, "bmp", file);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
-        System.out.println(file.getName() + " written successfully on disk.");
+        Task<Void> saveImageTask = new SaveImageTask(file, bufferedImage);
+        Thread thread = new Thread(saveImageTask);
+        thread.start();
+        progressBar.progressProperty().bind(saveImageTask.progressProperty());
+        progressBarLabel.textProperty().bind(saveImageTask.messageProperty());
     }
 }
