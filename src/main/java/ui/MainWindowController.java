@@ -138,9 +138,7 @@ public class MainWindowController {
     }
 
     private void saveImageToImage(File file) {
-        ImageMatrix matrix = imageFromFile.toImageMatrix();
-
-        BufferedImage bufferedImage = matrix.toBufferedImage();
+        BufferedImage bufferedImage = imageFromFile.getBufferedImage();
 //        try {
 //            ImageIO.write(bufferedImage, "bmp", file);
 //        } catch (IOException e) {
@@ -150,7 +148,11 @@ public class MainWindowController {
         Task<Void> saveImageTask = new SaveImageTask(file, bufferedImage);
         Thread thread = new Thread(saveImageTask);
         thread.start();
-        progressBar.progressProperty().bind(saveImageTask.progressProperty());
-        progressBarLabel.textProperty().bind(saveImageTask.messageProperty());
+        bindStatusElements(saveImageTask);
+    }
+
+    private void bindStatusElements(Task<Void> task) {
+        progressBar.progressProperty().bind(task.progressProperty());
+        progressBarLabel.textProperty().bind(task.messageProperty());
     }
 }
