@@ -24,7 +24,6 @@ public class SaveImageTask extends Task<Void> {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Thread.sleep(5000);
         System.out.println(file.getName() + " written successfully on disk.");
         updateProgress(100, 100);
         updateMessage(file.getName() + " written successfully on disk");
