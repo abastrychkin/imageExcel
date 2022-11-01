@@ -38,6 +38,8 @@ public class MainWindowController {
 
     private ImageFromFile imageFromFile;
 
+    File initialDirectory;
+
     @FXML
     public void initialize() {
         imageView.setPreserveRatio(true);
@@ -89,8 +91,14 @@ public class MainWindowController {
 
     private File getFileFromDialog() {
         FileChooser dialog = new FileChooser();
+
+        if (initialDirectory != null) {
+            dialog.setInitialDirectory(initialDirectory);
+        }
+
         dialog.setTitle("Choose file");
         File file = dialog.showOpenDialog(borderPane.getScene().getWindow());
+        initialDirectory = file.getParentFile();
         return file;
     }
 
@@ -104,6 +112,10 @@ public class MainWindowController {
 
     private File createFileFromDialog(String extensionDescription, String extensionMask, String extensionString) {
         FileChooser dialog = new FileChooser();
+
+        if (initialDirectory != null) {
+            dialog.setInitialDirectory(initialDirectory);
+        }
 
         //Set extension filter for text files
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(extensionDescription, extensionMask);
