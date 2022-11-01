@@ -7,8 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
+import javafx.scene.image.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import matrix.ImageMatrix;
@@ -49,7 +49,9 @@ public class MainWindowController {
             var x = scrollPane.getHvalue();
             var y = scrollPane.getVvalue();
 
-            imageView.setFitWidth(imageFromFile.getBufferedImage().getWidth() * newV.doubleValue());
+            Image scaledImage = resample(imageFromFile.toFXImage(), newV.intValue());
+            imageView.setImage(scaledImage);
+
             scrollPane.setHvalue(x);
             scrollPane.setVvalue(y);
         });
@@ -57,14 +59,13 @@ public class MainWindowController {
 
     private void setImageByWidth(Image image) {
         imageView.setImage(image);
-
         fitImageOnScrollPane(image);
     }
 
     private void fitImageOnScrollPane(Image image) {
         double scrollPaneWidth = scrollPane.getWidth();
         double imageWidth = image.getWidth();
-        double zoomCoefficient =  scrollPaneWidth / imageWidth;
+        int zoomCoefficient = (int) (scrollPaneWidth / imageWidth);
         zoomSlider.setValue(zoomCoefficient);
     }
 
@@ -139,11 +140,6 @@ public class MainWindowController {
 
     private void saveImageToImage(File file) {
         BufferedImage bufferedImage = imageFromFile.getBufferedImage();
-//        try {
-//            ImageIO.write(bufferedImage, "bmp", file);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
 
         Task<Void> saveImageTask = new SaveImageTask(file, bufferedImage);
         Thread thread = new Thread(saveImageTask);
@@ -154,5 +150,34 @@ public class MainWindowController {
     private void bindStatusElements(Task<Void> task) {
         progressBar.progressProperty().bind(task.progressProperty());
         progressBarLabel.textProperty().bind(task.messageProperty());
+    }
+
+
+
+    private Image resample(Image input, int scaleFactor) {
+        final int W = (int) input.getWidth();
+        final int H = (int) input.getHeight();
+        final int S = scaleFactor;
+
+        WritableImage output = new WritableImage(
+                W * S,
+                H * S
+        );
+
+        PixelReader reader = input.getPixelReader();
+        PixelWriter writer = output.getPixelWriter();
+
+        for (int y = 0; y < H; y++) {
+            for (int x = 0; x < W; x++) {
+                final int argb = reader.getArgb(x, y);
+                for (int dy = 0; dy < S; dy++) {
+                    for (int dx = 0; dx < S; dx++) {
+                        writer.setArgb(x * S + dx, y * S + dy, argb);
+                    }
+                }
+            }
+        }
+
+        return output;
     }
 }
